@@ -1,0 +1,62 @@
+.container {
+    -fx-background-color: #FAFAFA;
+}
+
+.logo-text {
+    -fx-font-size: 32px;
+    -fx-font-family: 'Josefin Sans Bold';
+    -fx-fill:#FFF;
+}
+
+.content-container {
+    -fx-pref-height:320px;
+    -fx-pref-width:460px;
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(85,85,97,.25), 16px, 0px, 0px, 2px);
+}
+
+.form-input {
+    -fx-pref-width: 250px;
+    -fx-pref-height: 35px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+    -fx-background-color: #FFF;
+    -fx-font-family: 'Josefin Sans Medium';
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #9394A5;
+    -fx-text-fill: #484B6A;
+    -fx-font-size: 14px;
+}
+
+.form-input:focused {
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #484B6A;
+}
+
+.form-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-background-color: linear-gradient(to bottom right,#57ddff, #c058f3);
+    -fx-font-family: 'Josefin Sans Bold';
+     -fx-font-size: 14px;
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-background-insets: 0;
+    -fx-text-fill: #FFF;
+    -fx-cursor: hand;
+}
+
+.form-button:hover {
+    -fx-border-color: linear-gradient(to bottom right,#57ddff, #c058f3);
+    -fx-background-color: transparent;
+    -fx-text-fill: #000;
+}
+
+.form-text {
+        -fx-font-size: 32px;
+       -fx-font-family: 'Josefin Sans Bold';
+       -fx-fill: #5F66DB;
+}

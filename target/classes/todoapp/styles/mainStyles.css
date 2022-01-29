@@ -1,0 +1,129 @@
+.container {
+    -fx-background-color: #FAFAFA;
+}
+
+.logo-text {
+    -fx-font-size: 32px;
+    -fx-font-family: 'Josefin Sans Bold';
+    -fx-fill:#FFF;
+}
+
+.input-wrapper {
+    -fx-pref-height:50px;
+    -fx-pref-width:400px;
+    -fx-background-color: #FFF;
+    -fx-border: none;
+    -fx-background-radius: 8px;
+}
+
+.todo-input {
+    -fx-pref-height:50px;
+    -fx-pref-width:355px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-background: transparent;
+    -fx-font-family: 'Josefin Sans Medium';
+    -fx-text-fill: #484B6A;
+    -fx-font-size: 14px;
+}
+
+.content-container {
+    -fx-pref-height:350px;
+    -fx-pref-width:400px;
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(85,85,97,.25), 16px, 0px, 0px, 2px);
+}
+
+.scroll-pane {
+    -fx-background: #FFF;
+    -fx-pref-height:306px;
+    -fx-pref-width:400px;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-border: none;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.todos-wrapper {
+    -fx-pref-width:400px;
+}
+
+.todo-checkbox {
+    -fx-font-size:11px;
+}
+
+.todo-checkbox .box {
+    -fx-background-color: #FFF;
+    -fx-border-width:1px;
+    -fx-border-color: #E4E5F1;
+    -fx-border-radius: 50%;
+    -fx-background-insets: 0;
+    -fx-background-radius: 50%;
+    -fx-padding: 3px 4px 5px 4px;
+}
+
+.todo-checkbox:selected .box,
+.todo-checkbox:hover .box {
+    -fx-border-color: linear-gradient(to bottom right,#57ddff, #c058f3);
+}
+
+.todo-checkbox:selected .box{
+    -fx-background-color: linear-gradient(to bottom right,#57ddff, #c058f3);
+}
+
+.todo-checkbox:selected .mark {
+    -fx-background-color: #FFF;
+}
+
+.todo-text {
+    -fx-font-family: 'Josefin Sans Regular';
+    -fx-fill: #484B6A;
+    -fx-font-size: 14px;
+}
+
+.cross-icon {
+    -fx-opacity:0;
+}
+
+.todo-element:hover .cross-icon {
+    -fx-opacity: 1;
+}
+
+.todo-element {
+    -fx-pref-height:51px;
+    -fx-pref-width:400px;
+    -fx-background-insets: 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #E4E5F1;
+    -fx-spacing:18px;
+}
+
+.bottom-bar {
+    -fx-pref-height:44px;
+    -fx-pref-width:396px;
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: #E4E5F1;
+}
+
+.filter-item {
+    -fx-fill: #9394A5;
+    -fx-font-family: 'Josefin Sans Bold';
+}
+
+.outside-element {
+    -fx-fill: #9394A5;
+    -fx-font-family: 'Josefin Sans Medium';
+}
+
+.todo-checkbox:hover,
+.cross-icon:hover {
+    -fx-cursor: hand;
+}
+
+.filter-item:hover,
+.outside-element:hover {
+    -fx-fill: #484B6A;
+    -fx-cursor: hand;
+}
