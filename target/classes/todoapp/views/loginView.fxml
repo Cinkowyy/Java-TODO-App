@@ -58,10 +58,11 @@
             <Text layoutX="266.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo-text" text="T O D O" />
             <Pane layoutX="266.0" layoutY="151.0" styleClass="content-container">
                <children>
-                  <TextField id="loginInput" layoutX="105.0" layoutY="115.0" promptText="Login" styleClass="form-input" />
-                  <PasswordField id="passwordInput" layoutX="105.0" layoutY="170.0" promptText="Password" styleClass="form-input" />
-                  <Button id="loginButton" layoutX="331.0" layoutY="251.0" mnemonicParsing="false" style="-fx-background-radius: 8px;" styleClass="form-button" text="LOGIN" />
+                  <TextField fx:id="loginInput" layoutX="105.0" layoutY="115.0" promptText="Login" styleClass="form-input" />
+                  <PasswordField fx:id="passwordInput" layoutX="105.0" layoutY="170.0" promptText="Password" styleClass="form-input" />
+                  <Button fx:id="loginButton" layoutX="331.0" layoutY="251.0" mnemonicParsing="false" styleClass="form-button" text="LOGIN" />
                   <Text layoutX="105.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="form-text" text="Login" />
+                  <Text fx:id="errorMessage" layoutX="104.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-message" />
                </children></Pane>
       </children>
       </AnchorPane>

@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import todoapp.controllers.loginController;
+import todoapp.controllers.LoginController;
 
 public class Main extends Application {
 
@@ -22,7 +22,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(this.getClass().getResource("views/loginView.fxml"));
 
-        loginController controller = new loginController();
+        LoginController controller = new LoginController();
         loader.setController(controller);
 
         Scene loginView = new Scene(loader.load());
