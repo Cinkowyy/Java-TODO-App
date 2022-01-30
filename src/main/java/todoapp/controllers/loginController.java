@@ -9,7 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import todoapp.modules.UserAuthentication;
-
 import java.io.IOException;
 
 
@@ -45,10 +44,9 @@ public class LoginController {
 
                     String login = loginInput.getText();
                     String password = passwordInput.getText();
-                    System.out.println("Login: "+ login);
-                    System.out.println("Password: "+ password);
 
                     try {
+                        UserAuthentication.authenticate(login, password);
                         UserAuthentication.loadMainView((Stage) loginInput.getScene().getWindow(), this.getClass().getResource("../views/mainView.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();

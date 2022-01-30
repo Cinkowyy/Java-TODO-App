@@ -1,5 +1,6 @@
 package todoapp.modules;
 
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,12 +16,16 @@ import java.net.http.HttpResponse;
 public abstract class UserAuthentication {
 
     public static void authenticate(String login, String password) {
+
+        UserData data = new UserData(login, password);
+
+        Gson gson =  new Gson();
+        String jsonData = gson.toJson(data);
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://reqbin.com/echo/post/json"))
+                .uri(URI.create("http://localhost:3000/login"))
                 .header("Content-Type", "application/json")
-                .method("POST", HttpRequest.BodyPublishers.ofString(
-                        "{" + "\"login\": \""+login+"\"," +
-                                "\"password\": "+password+"}"))
+                .method("POST", HttpRequest.BodyPublishers.ofString(jsonData))
                 .build();
 
         HttpResponse<String> response = null;
