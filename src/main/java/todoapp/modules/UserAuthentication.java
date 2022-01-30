@@ -15,7 +15,7 @@ import java.net.http.HttpResponse;
 
 public abstract class UserAuthentication {
 
-    public static void authenticate(String login, String password) {
+    public static boolean authenticate(String login, String password) {
 
         UserData data = new UserData(login, password);
 
@@ -32,10 +32,20 @@ public abstract class UserAuthentication {
 
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            //System.out.println(response.body());
+            if(response.statusCode() == 200) {
+                AuthKey key = gson.fromJson(response.body(), AuthKey.class);
+                System.out.println(key.getKey());
+                return true;
+            } else {
+                ErrorMessage message = gson.fromJson(response.body(), ErrorMessage.class);
+                System.out.println(message.errorMessage);
+            }
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 

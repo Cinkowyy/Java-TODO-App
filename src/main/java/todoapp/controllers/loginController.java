@@ -39,6 +39,10 @@ public class LoginController {
                     errorMessage.setText("Fields cannot be empty");
                     errorMessage.setStyle("-fx-opacity: 1;");
 
+                } else if(loginInput.getText().length() < 3  || passwordInput.getText().length() < 8){
+                    errorMessage.setText("Invalid login or password");
+                    errorMessage.setStyle("-fx-opacity: 1;");
+
                 } else {
                     errorMessage.setStyle("-fx-opacity: 0;");
 
@@ -46,9 +50,10 @@ public class LoginController {
                     String password = passwordInput.getText();
 
                     try {
-                        UserAuthentication.authenticate(login, password);
-                        UserAuthentication.loadMainView((Stage) loginInput.getScene().getWindow(), this.getClass().getResource("../views/mainView.fxml"));
-                    } catch (IOException e) {
+                        if(UserAuthentication.authenticate(login, password)) {
+                            UserAuthentication.loadMainView((Stage) loginInput.getScene().getWindow(), this.getClass().getResource("../views/mainView.fxml"));
+                        }
+                    } catch(IOException e) {
                         e.printStackTrace();
                     }
                 }
