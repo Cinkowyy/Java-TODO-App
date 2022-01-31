@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.UserAuthentication;
 import java.io.IOException;
 
@@ -26,31 +27,27 @@ public class LoginController {
     @FXML
     private Text errorMessage;
 
-    public LoginController() {
-        System.out.println("Jestem kontrolerem");
-    }
-
     @FXML
     void initialize() {
+
+        LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
         loginButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent){
                 if(loginInput.getText().length() == 0 || passwordInput.getText().length() == 0) {
-                    errorMessage.setText("Fields cannot be empty");
-                    errorMessage.setStyle("-fx-opacity: 1;");
+                    loginMessageController.setMessage("Fields cannot be empty");
 
                 } else if(loginInput.getText().length() < 3  || passwordInput.getText().length() < 8){
-                    errorMessage.setText("Invalid login or password");
-                    errorMessage.setStyle("-fx-opacity: 1;");
+                    loginMessageController.setMessage("Invalid login or password");
 
                 } else {
-                    errorMessage.setStyle("-fx-opacity: 0;");
+                    loginMessageController.removeMessage();
 
                     String login = loginInput.getText();
                     String password = passwordInput.getText();
 
                     try {
-                        if(UserAuthentication.authenticate(login, password)) {
+                        if(UserAuthentication.authenticate(login, password, loginMessageController)) {
                             UserAuthentication.loadMainView((Stage) loginInput.getScene().getWindow(), this.getClass().getResource("../views/mainView.fxml"));
                         }
                     } catch(IOException e) {

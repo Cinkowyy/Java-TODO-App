@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import todoapp.controllers.MainController;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,7 +16,9 @@ import java.net.http.HttpResponse;
 
 public abstract class UserAuthentication {
 
-    public static boolean authenticate(String login, String password) {
+    public static AuthKey authKey;
+
+    public static boolean authenticate(String login, String password, LoginErrorMessage errorMessageController) {
 
         UserData data = new UserData(login, password);
 
@@ -32,18 +35,17 @@ public abstract class UserAuthentication {
 
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            //System.out.println(response.body());
+
             if(response.statusCode() == 200) {
-                AuthKey key = gson.fromJson(response.body(), AuthKey.class);
-                System.out.println(key.getKey());
+                authKey = new AuthKey(response.body());
                 return true;
             } else {
-                ErrorMessage message = gson.fromJson(response.body(), ErrorMessage.class);
-                System.out.println(message.errorMessage);
+                errorMessageController.setMessage(response.body());
             }
 
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+                errorMessageController.setMessage("Server connection error");
+                e.printStackTrace();
         }
         return false;
     }
@@ -53,6 +55,10 @@ public abstract class UserAuthentication {
     public static void loadMainView(Stage AppStage, URL url) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(url);
+
+        MainController controller = new MainController(authKey);
+        loader.setController(controller);
+
         Scene mainView = new Scene(loader.load());
         AppStage.setTitle("TODO App");
         mainView.lookup(".logo-text").requestFocus();

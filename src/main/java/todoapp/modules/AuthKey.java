@@ -1,7 +1,7 @@
 package todoapp.modules;
 
 public class AuthKey {
-    private String AuthKey;
+    private final String AuthKey;
 
     public AuthKey(String key) {
         AuthKey = key;
