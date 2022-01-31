@@ -37,10 +37,11 @@ public abstract class UserAuthentication {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
             if(response.statusCode() == 200) {
-                authKey = new AuthKey(response.body());
+                authKey = gson.fromJson(response.body(), AuthKey.class);
                 return true;
             } else {
-                errorMessageController.setMessage(response.body());
+                Message errorMsg = gson.fromJson(response.body(), Message.class);
+                errorMessageController.setMessage(errorMsg.message);
             }
 
         } catch (IOException | InterruptedException e) {
