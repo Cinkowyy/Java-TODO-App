@@ -9,9 +9,11 @@ import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Todo;
 import todoapp.modules.TodosGetter;
 
+import java.util.ArrayList;
+
 public class MainController {
 
-    private AuthKey key;
+    private final AuthKey key;
 
     @FXML
     private TextField todoInput;
@@ -33,11 +35,10 @@ public class MainController {
 
         LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
 
-        Todo todo = new Todo(2, "Make this shit work", true);
-        todosContainer.getChildren().add(todo.renderTask());
+        ArrayList<Todo> todosList = TodosGetter.getTodos(this.key, loginMessageController);
 
-        TodosGetter.getTodos(this.key, loginMessageController);
-
+        TodosController todosController = new TodosController(this.todosContainer);
+        todosController.renderTasks(todosList);
     }
 
 }
