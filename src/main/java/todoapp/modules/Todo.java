@@ -1,5 +1,7 @@
 package todoapp.modules;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
@@ -13,23 +15,29 @@ public class Todo {
 
     public int id;
     public String content;
-    public int status;
+    public boolean status;
 
     public Todo(int taskId, String taskContent, int taskStatus) {
         this.id = taskId;
         this.content = taskContent;
-        this.status = taskStatus;
+        if(taskStatus == 1)
+            this.status = true;
+        else
+            this.status = false;
     }
 
     public HBox renderTask() {
 
         int taskId = this.id;
+        boolean taskStatus = this.status;
 
         HBox container = new HBox();
         container.getStyleClass().add("todo-element");
 
         CheckBox checkBox = new CheckBox();
         checkBox.getStyleClass().add("todo-checkbox");
+        checkBox.setSelected(status);
+
 
         FlowPane contentContainer = new FlowPane();
         contentContainer.getStyleClass().add("todo-text-wrapper");
@@ -45,23 +53,47 @@ public class Todo {
         crossIcon.setImage(cross);
         crossIcon.getStyleClass().add("cross-icon");
 
+        textStrikethrough(status,contentText);
+
+        //change status event
+        checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                textStrikethrough(newValue, contentText);
+                changeStatus(newValue);
+            }
+        });
+
         contentContainer.getChildren().add(contentText);
 
         container.getChildren().add(checkBox);
         container.getChildren().add(contentContainer);
         container.getChildren().add(crossIcon);
 
+        //mouse click event
         container.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(taskId);
-
+                System.out.println(status);
             }
         });
 
         return container;
     }
 
+    public void textStrikethrough(boolean checked, Text text) {
+
+        if(checked)
+            text.getStyleClass().add("completed");
+        else
+            text.getStyleClass().remove("completed");
+
+    }
+
+    public void changeStatus(boolean newStatus) {
+        this.status = newStatus;
+    }
 
 
 }

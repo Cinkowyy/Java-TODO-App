@@ -99,6 +99,11 @@
     -fx-font-size: 14px;
 }
 
+.todo-text.completed {
+    -fx-strikethrough: true;
+    -fx-fill: #9394A5;
+}
+
 .cross-icon {
     -fx-opacity:0;
 }

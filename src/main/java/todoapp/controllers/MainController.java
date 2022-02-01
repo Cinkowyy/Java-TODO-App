@@ -17,7 +17,7 @@ public class MainController {
 
     @FXML
     void initialize() {
-        Todo todo = new Todo(2, "Make this shit work", 0);
+        Todo todo = new Todo(2, "Make this shit work", 1);
         todosContainer.getChildren().add(todo.renderTask());
     }
 
