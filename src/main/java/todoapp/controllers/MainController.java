@@ -33,7 +33,7 @@ public class MainController {
 
         LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
 
-        Todo todo = new Todo(2, "Make this shit work", 1);
+        Todo todo = new Todo(2, "Make this shit work", true);
         todosContainer.getChildren().add(todo.renderTask());
 
         TodosGetter.getTodos(this.key, loginMessageController);

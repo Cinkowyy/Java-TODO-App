@@ -17,13 +17,10 @@ public class Todo {
     public String content;
     public boolean status;
 
-    public Todo(int taskId, String taskContent, int taskStatus) {
+    public Todo(int taskId, String taskContent, boolean taskStatus) {
         this.id = taskId;
         this.content = taskContent;
-        if(taskStatus == 1)
-            this.status = true;
-        else
-            this.status = false;
+        this.status = taskStatus;
     }
 
     public HBox renderTask() {
