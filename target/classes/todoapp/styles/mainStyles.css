@@ -50,6 +50,17 @@
     -fx-pref-width:400px;
 }
 
+.todo-element {
+    -fx-pref-height:51px;
+    -fx-pref-width:400px;
+    -fx-background-insets: 0;
+    -fx-padding: 0 13px 0 13px;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #E4E5F1;
+    -fx-spacing:18px;
+    -fx-alignment: CENTER_LEFT;
+}
+
 .todo-checkbox {
     -fx-font-size:11px;
 }
@@ -77,6 +88,11 @@
     -fx-background-color: #FFF;
 }
 
+.todo-text-wrapper {
+    -fx-alignment: CENTER_LEFT;
+    -fx-column-halignment: CENTER;
+}
+
 .todo-text {
     -fx-font-family: 'Josefin Sans Regular';
     -fx-fill: #484B6A;
@@ -89,15 +105,6 @@
 
 .todo-element:hover .cross-icon {
     -fx-opacity: 1;
-}
-
-.todo-element {
-    -fx-pref-height:51px;
-    -fx-pref-width:400px;
-    -fx-background-insets: 0;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #E4E5F1;
-    -fx-spacing:18px;
 }
 
 .bottom-bar {

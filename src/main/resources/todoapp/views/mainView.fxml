@@ -73,9 +73,9 @@
                <children>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane" vbarPolicy="NEVER">
                      <content>
-                        <VBox styleClass="todos-wrapper">
+                        <VBox fx:id="todosContainer" styleClass="todos-wrapper">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="todo-element">
+                              <HBox alignment="CENTER_LEFT" styleClass="todo-element">
                                  <children>
                                     <CheckBox ellipsisString="" mnemonicParsing="false" styleClass="todo-checkbox" />
                                     <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefWrapLength="300.0">
