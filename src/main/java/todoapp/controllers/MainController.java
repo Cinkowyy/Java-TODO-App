@@ -7,8 +7,11 @@ import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
 import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Todo;
+import todoapp.modules.TodosGetter;
 
 public class MainController {
+
+    private AuthKey key;
 
     @FXML
     private TextField todoInput;
@@ -20,8 +23,9 @@ public class MainController {
     private Text errorMessage;
 
     public MainController(AuthKey authKey) {
+        this.key =authKey;
         System.out.println("MainController started with key:");
-        System.out.println(authKey.getKey());
+        System.out.println(key.getKey());
     }
 
     @FXML
@@ -31,6 +35,8 @@ public class MainController {
 
         Todo todo = new Todo(2, "Make this shit work", 1);
         todosContainer.getChildren().add(todo.renderTask());
+
+        TodosGetter.getTodos(this.key, loginMessageController);
 
     }
 
