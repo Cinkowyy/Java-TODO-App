@@ -139,3 +139,10 @@
     -fx-fill: #484B6A;
     -fx-cursor: hand;
 }
+
+.error-message {
+           -fx-font-size: 12px;
+           -fx-font-family: 'Josefin Sans Regular';
+           -fx-fill: #ff4d4d;
+           -fx-opacity: 0;
+}

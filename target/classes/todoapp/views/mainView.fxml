@@ -62,7 +62,7 @@
             <Text layoutX="296.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo-text" text="T O D O" />
             <Pane layoutX="296.0" layoutY="112.0" styleClass="input-wrapper">
                <children>
-                  <TextField depthTest="ENABLE" layoutX="45.0" promptText="Create a new todo..." styleClass="todo-input">
+                  <TextField fx:id="todoInput" depthTest="ENABLE" layoutX="45.0" promptText="Create a new todo..." styleClass="todo-input">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -108,6 +108,11 @@
                   </Pane>
                </children>
             </Pane>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="296.0" layoutY="534.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Text fx:id="errorMessage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-message" text="Missing login or password" textAlignment="CENTER" wrappingWidth="370.0" />
+               </children>
+            </FlowPane>
       </children>
       </AnchorPane>
   </children>
