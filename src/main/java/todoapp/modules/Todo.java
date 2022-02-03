@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import todoapp.controllers.DataController;
 
 public class Todo {
 
@@ -21,7 +22,7 @@ public class Todo {
 
     public HBox renderTask() {
 
-        int taskId = this.id;
+        int todoId = this.id;
 
         HBox container = new HBox();
         container.getStyleClass().add("todo-element");
@@ -45,12 +46,14 @@ public class Todo {
         crossIcon.setImage(cross);
         crossIcon.getStyleClass().add("cross-icon");
 
+
         textStrikethrough(status,contentText);
 
         //change status event
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             textStrikethrough(newValue, contentText);
             changeStatus(newValue);
+            DataController.updateStatus(todoId, newValue);
         });
 
         contentContainer.getChildren().add(contentText);
@@ -58,12 +61,6 @@ public class Todo {
         container.getChildren().add(checkBox);
         container.getChildren().add(contentContainer);
         container.getChildren().add(crossIcon);
-
-        //mouse click event
-        container.setOnMouseClicked(mouseEvent -> {
-            System.out.println(taskId);
-            System.out.println(status);
-        });
 
         return container;
     }

@@ -9,7 +9,6 @@ import todoapp.modules.AuthKey;
 import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Todo;
 import todoapp.modules.TodosGetter;
-
 import java.util.ArrayList;
 
 public class MainController {
@@ -58,17 +57,8 @@ public class MainController {
         TodosController todosController = new TodosController(this.todosContainer, todosList);
 
         todoInput.setOnKeyPressed(keyEvent -> {
-           if(keyEvent.getCode() == KeyCode.ENTER) {
-               if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
-                   todosMessageController.removeMessage();
-                   Todo todo = new Todo(3, todoInput.getText(), false);
-                   todoInput.setText("");
-                   todosList.add(todo);
-                   todosController.renderTasks(filter);
-               } else {
-                   todosMessageController.setMessage("Empty field or too many characters(max 64)");
-               }
-           }
+           if(keyEvent.getCode() == KeyCode.ENTER)
+               addTodoElement(todosMessageController,todosList, todosController);
         });
 
         allFilter.setOnMouseClicked(mouseEvent -> {
@@ -100,6 +90,21 @@ public class MainController {
         allFilter.getStyleClass().remove("active");
         activeFilter.getStyleClass().remove("active");
         completedFilter.getStyleClass().remove("active");
+    }
+
+    void addTodoElement(LoginErrorMessage msgController, ArrayList<Todo> list, TodosController todosController) {
+
+        if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
+            int id =  DataController.insertTodo(todoInput.getText());
+            msgController.removeMessage();
+            Todo todo = new Todo(id, todoInput.getText(), false);
+            todoInput.setText("");
+            list.add(todo);
+            todosController.renderTasks(filter);
+        } else {
+            msgController.setMessage("Empty field or too many characters(max 64)");
+        }
+
     }
 
 }
