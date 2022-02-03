@@ -91,7 +91,7 @@
             </Pane>
           <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="296.0" layoutY="534.0" prefHeight="30.0" prefWidth="400.0">
               <children>
-                  <Text fx:id="errorMessage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-message" text="Missing login or password" textAlignment="CENTER" wrappingWidth="370.0" />
+                  <Text fx:id="errorMessageField" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-message" text="Missing login or password" textAlignment="CENTER" wrappingWidth="370.0" />
               </children>
           </FlowPane>
       </children>

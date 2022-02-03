@@ -2,6 +2,7 @@ package todoapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class MainController {
 
     private final AuthKey key;
+    public String filter;
 
     @FXML
     private TextField todoInput;
@@ -37,10 +39,11 @@ public class MainController {
     private Text clearOption;
 
     @FXML
-    private Text errorMessage;
+    private Text errorMessageField;
 
     public MainController(AuthKey authKey) {
         this.key =authKey;
+        this.filter = "All";
         System.out.println("MainController started with key:");
         System.out.println(key.getKey());
     }
@@ -48,30 +51,48 @@ public class MainController {
     @FXML
     void initialize() {
 
-        LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
+        LoginErrorMessage todosMessageController = new LoginErrorMessage(errorMessageField);
 
-        ArrayList<Todo> todosList = TodosGetter.getTodos(this.key, loginMessageController);
+        ArrayList<Todo> todosList = TodosGetter.getTodos(this.key, todosMessageController);
 
         TodosController todosController = new TodosController(this.todosContainer, todosList);
-        todosController.renderTasks("All");
+
+        todoInput.setOnKeyPressed(keyEvent -> {
+           if(keyEvent.getCode() == KeyCode.ENTER) {
+               if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
+                   todosMessageController.removeMessage();
+                   Todo todo = new Todo(3, todoInput.getText(), false);
+                   todoInput.setText("");
+                   todosList.add(todo);
+                   todosController.renderTasks(filter);
+               } else {
+                   todosMessageController.setMessage("Empty field or too many characters(max 64)");
+               }
+           }
+        });
 
         allFilter.setOnMouseClicked(mouseEvent -> {
-            todosController.renderTasks("All");
+            filter = "All";
+            todosController.renderTasks(filter);
             clearActiveClass();
             allFilter.getStyleClass().add("active");
         });
 
         activeFilter.setOnMouseClicked(mouseEvent -> {
-            todosController.renderTasks("Active");
+            filter = "Active";
+            todosController.renderTasks(filter);
             clearActiveClass();
             activeFilter.getStyleClass().add("active");
         });
 
         completedFilter.setOnMouseClicked(mouseEvent -> {
-            todosController.renderTasks("Completed");
+            filter = "Completed";
+            todosController.renderTasks(filter);
             clearActiveClass();
             completedFilter.getStyleClass().add("active");
         });
+
+        todosController.renderTasks(filter);
 
     }
 
