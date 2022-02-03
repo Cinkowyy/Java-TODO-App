@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.String?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -75,11 +76,15 @@
                   </ScrollPane>
                   <Pane layoutX="2.0" layoutY="306.0" styleClass="bottom-bar">
                      <children>
-                        <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="5 items left" />
-                        <Text layoutX="292.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="Clear completed" />
-                        <Text layoutX="133.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="filter-item" text="All" />
-                        <Text layoutX="159.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="filter-item" text="Active" />
-                        <Text layoutX="202.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="filter-item" text="Completed" />
+                        <Text fx:id="numberOfItems" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="5 items left" />
+                        <Text fx:id="clearOption" layoutX="292.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="Clear completed" />
+                        <Text fx:id="allFilter" layoutX="133.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All">
+                           <styleClass>
+                              <String fx:value="filter-item" />
+                              <String fx:value="active" />
+                           </styleClass></Text>
+                        <Text fx:id="activeFilter" layoutX="159.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="filter-item" text="Active" />
+                        <Text fx:id="completedFilter" layoutX="202.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="filter-item" text="Completed" />
                      </children>
                   </Pane>
                </children>

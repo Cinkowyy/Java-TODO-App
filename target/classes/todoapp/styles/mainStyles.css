@@ -140,6 +140,10 @@
     -fx-cursor: hand;
 }
 
+.filter-item.active {
+    -fx-fill: #3A7BFD;
+}
+
 .error-message {
            -fx-font-size: 12px;
            -fx-font-family: 'Josefin Sans Regular';

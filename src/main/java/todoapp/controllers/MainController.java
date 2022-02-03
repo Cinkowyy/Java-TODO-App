@@ -1,7 +1,9 @@
 package todoapp.controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
@@ -22,6 +24,21 @@ public class MainController {
     private VBox todosContainer;
 
     @FXML
+    private Text numberOfItems;
+
+    @FXML
+    private Text allFilter;
+
+    @FXML
+    private Text activeFilter;
+
+    @FXML
+    private Text completedFilter;
+
+    @FXML
+    private Text clearOption;
+
+    @FXML
     private Text errorMessage;
 
     public MainController(AuthKey authKey) {
@@ -39,6 +56,40 @@ public class MainController {
 
         TodosController todosController = new TodosController(this.todosContainer, todosList);
         todosController.renderTasks("All");
+
+        allFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                todosController.renderTasks("All");
+                clearActiveClass();
+                allFilter.getStyleClass().add("active");
+            }
+        });
+
+        activeFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                todosController.renderTasks("Active");
+                clearActiveClass();
+                activeFilter.getStyleClass().add("active");
+            }
+        });
+
+        completedFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                todosController.renderTasks("Completed");
+                clearActiveClass();
+                completedFilter.getStyleClass().add("active");
+            }
+        });
+
+    }
+
+    void clearActiveClass() {
+        allFilter.getStyleClass().remove("active");
+        activeFilter.getStyleClass().remove("active");
+        completedFilter.getStyleClass().remove("active");
     }
 
 }

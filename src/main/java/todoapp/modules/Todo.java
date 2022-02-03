@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import todoapp.controllers.TodosController;
 
 public class Todo {
 
@@ -26,7 +27,6 @@ public class Todo {
     public HBox renderTask() {
 
         int taskId = this.id;
-        boolean taskStatus = this.status;
 
         HBox container = new HBox();
         container.getStyleClass().add("todo-element");

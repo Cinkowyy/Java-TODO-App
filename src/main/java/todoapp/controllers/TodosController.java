@@ -17,8 +17,11 @@ public class TodosController {
 
     public void renderTasks(String filter) {
 
+        todosContainer.getChildren().clear();
+
         if(todosList.size()>0) {
             switch (filter) {
+
                 case "Completed" -> todosList.forEach((todo) -> {
                     if (todo.status)
                         todosContainer.getChildren().add(todo.renderTask());
