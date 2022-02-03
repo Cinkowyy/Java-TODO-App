@@ -37,8 +37,8 @@ public class MainController {
 
         ArrayList<Todo> todosList = TodosGetter.getTodos(this.key, loginMessageController);
 
-        TodosController todosController = new TodosController(this.todosContainer);
-        todosController.renderTasks(todosList);
+        TodosController todosController = new TodosController(this.todosContainer, todosList);
+        todosController.renderTasks("All");
     }
 
 }
