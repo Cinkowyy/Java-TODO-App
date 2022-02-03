@@ -1,16 +1,11 @@
 package todoapp.modules;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import todoapp.controllers.TodosController;
 
 public class Todo {
 
@@ -53,12 +48,9 @@ public class Todo {
         textStrikethrough(status,contentText);
 
         //change status event
-        checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
-                textStrikethrough(newValue, contentText);
-                changeStatus(newValue);
-            }
+        checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
+            textStrikethrough(newValue, contentText);
+            changeStatus(newValue);
         });
 
         contentContainer.getChildren().add(contentText);
@@ -68,12 +60,9 @@ public class Todo {
         container.getChildren().add(crossIcon);
 
         //mouse click event
-        container.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println(taskId);
-                System.out.println(status);
-            }
+        container.setOnMouseClicked(mouseEvent -> {
+            System.out.println(taskId);
+            System.out.println(status);
         });
 
         return container;

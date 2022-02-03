@@ -1,9 +1,7 @@
 package todoapp.controllers;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
@@ -57,31 +55,22 @@ public class MainController {
         TodosController todosController = new TodosController(this.todosContainer, todosList);
         todosController.renderTasks("All");
 
-        allFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                todosController.renderTasks("All");
-                clearActiveClass();
-                allFilter.getStyleClass().add("active");
-            }
+        allFilter.setOnMouseClicked(mouseEvent -> {
+            todosController.renderTasks("All");
+            clearActiveClass();
+            allFilter.getStyleClass().add("active");
         });
 
-        activeFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                todosController.renderTasks("Active");
-                clearActiveClass();
-                activeFilter.getStyleClass().add("active");
-            }
+        activeFilter.setOnMouseClicked(mouseEvent -> {
+            todosController.renderTasks("Active");
+            clearActiveClass();
+            activeFilter.getStyleClass().add("active");
         });
 
-        completedFilter.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                todosController.renderTasks("Completed");
-                clearActiveClass();
-                completedFilter.getStyleClass().add("active");
-            }
+        completedFilter.setOnMouseClicked(mouseEvent -> {
+            todosController.renderTasks("Completed");
+            clearActiveClass();
+            completedFilter.getStyleClass().add("active");
         });
 
     }

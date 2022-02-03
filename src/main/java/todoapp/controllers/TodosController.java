@@ -22,17 +22,17 @@ public class TodosController {
         if(todosList.size()>0) {
             switch (filter) {
 
-                case "Completed" -> todosList.forEach((todo) -> {
-                    if (todo.status)
-                        todosContainer.getChildren().add(todo.renderTask());
-                });
+            case "Completed" -> todosList.forEach((todo) -> {
+                if (todo.status)
+                    todosContainer.getChildren().add(todo.renderTask());
+            });
 
-                case "Active" -> todosList.forEach((todo) -> {
-                    if (!todo.status)
-                        todosContainer.getChildren().add(todo.renderTask());
-                });
+            case "Active" -> todosList.forEach((todo) -> {
+                if (!todo.status)
+                    todosContainer.getChildren().add(todo.renderTask());
+            });
 
-                default -> todosList.forEach( (todo) -> todosContainer.getChildren().add(todo.renderTask()));
+            default -> todosList.forEach((todo) -> todosContainer.getChildren().add(todo.renderTask()));
             }
         }
     }

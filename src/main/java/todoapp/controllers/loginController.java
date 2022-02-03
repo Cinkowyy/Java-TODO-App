@@ -31,13 +31,13 @@ public class LoginController {
     void initialize() {
 
         LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
-        loginButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        loginButton.setOnMouseClicked(new EventHandler<>() {
             @Override
-            public void handle(MouseEvent mouseEvent){
-                if(loginInput.getText().length() == 0 || passwordInput.getText().length() == 0) {
+            public void handle(MouseEvent mouseEvent) {
+                if (loginInput.getText().length() == 0 || passwordInput.getText().length() == 0) {
                     loginMessageController.setMessage("Fields cannot be empty");
 
-                } else if(loginInput.getText().length() < 3  || passwordInput.getText().length() < 8){
+                } else if (loginInput.getText().length() < 3 || passwordInput.getText().length() < 8) {
                     loginMessageController.setMessage("Invalid login or password");
 
                 } else {
@@ -47,10 +47,10 @@ public class LoginController {
                     String password = passwordInput.getText();
 
                     try {
-                        if(UserAuthentication.authenticate(login, password, loginMessageController)) {
+                        if (UserAuthentication.authenticate(login, password, loginMessageController)) {
                             UserAuthentication.loadMainView((Stage) loginInput.getScene().getWindow(), this.getClass().getResource("../views/mainView.fxml"));
                         }
-                    } catch(IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
