@@ -47,13 +47,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="D:/Cinkowyy/gson-2.8.9.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/todoapp/images" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.45517242" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cinek\OneDrive\Pulpit\Projekty github\java-todo-app\src\main\resources\todoapp\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cinek\OneDrive\Pulpit\Projekty github\Java-TODO-App\src\main\resources\todoapp" />
       <recent name="C:\Users\cinek\OneDrive\Pulpit\Projekty github\Java-TODO-App\src\main\resources" />

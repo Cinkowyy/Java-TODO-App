@@ -18,13 +18,17 @@
 
 .todo-input {
     -fx-pref-height:50px;
-    -fx-pref-width:355px;
+    -fx-pref-width:316px;
     -fx-background-insets: 0;
-    -fx-background-radius: 0 8px 8px 0;
+    -fx-background-radius: 0;
     -fx-background: transparent;
     -fx-font-family: 'Josefin Sans Medium';
     -fx-text-fill: #484B6A;
     -fx-font-size: 14px;
+}
+
+.plus-icon:hover {
+    cursor:hand;
 }
 
 .content-container {
