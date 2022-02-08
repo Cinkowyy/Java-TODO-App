@@ -31,7 +31,6 @@ public class Todo {
         checkBox.getStyleClass().add("todo-checkbox");
         checkBox.setSelected(status);
 
-
         FlowPane contentContainer = new FlowPane();
         contentContainer.getStyleClass().add("todo-text-wrapper");
         contentContainer.setPrefWrapLength(300);

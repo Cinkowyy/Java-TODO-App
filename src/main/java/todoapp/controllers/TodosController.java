@@ -1,8 +1,10 @@
 package todoapp.controllers;
 
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import todoapp.modules.Todo;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class TodosController {
@@ -24,17 +26,28 @@ public class TodosController {
 
             case "Completed" -> todosList.forEach((todo) -> {
                 if (todo.status)
-                    todosContainer.getChildren().add(todo.renderTask());
+                    todosContainer.getChildren().add(addListener(todo, filter));
             });
 
             case "Active" -> todosList.forEach((todo) -> {
                 if (!todo.status)
-                    todosContainer.getChildren().add(todo.renderTask());
+                    todosContainer.getChildren().add(addListener(todo, filter));
             });
 
-            default -> todosList.forEach((todo) -> todosContainer.getChildren().add(todo.renderTask()));
+            default -> todosList.forEach((todo) -> todosContainer.getChildren().add(addListener(todo, filter)));
             }
         }
+    }
+
+    public HBox addListener(Todo todo, String filter) {
+
+        HBox todoElement = todo.renderTask();
+        todoElement.lookup(".cross-icon").setOnMouseClicked(MouseEvent -> {
+            todosList.remove(todo);
+            renderTasks(filter);
+        });
+
+        return  todoElement;
     }
 
 }
