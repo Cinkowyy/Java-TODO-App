@@ -1,7 +1,10 @@
 package todoapp.controllers;
 
 import com.google.gson.Gson;
+import todoapp.modules.AuthKey;
+import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Message;
+import todoapp.modules.Todo;
 
 import java.io.IOException;
 import java.net.URI;
@@ -34,9 +37,33 @@ public abstract class DataController {
         System.out.println("Deleted todo id: "+ todoId);
     }
 
-    //ma zwracać id todosa w bazie
-    public static int insertTodo(String todoContent) {
-        System.out.println("Added new todo");
-        return 3;
+    public static Todo insertTodo(Todo newTodo, LoginErrorMessage msgController, AuthKey key) {
+
+        String jsonTodo = gson.toJson(newTodo);
+        System.out.println(key.getKey());
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/add"))
+                .header("Content-Type", "application/json")
+                .header("Authorization", key.getKey())
+                .method("POST", HttpRequest.BodyPublishers.ofString(jsonTodo))
+                .build();
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if( response != null && response.statusCode() == 200) {
+            newTodo = gson.fromJson(response.body(), Todo.class);
+            System.out.println("Added new todo");
+        } else {
+            Message msg = gson.fromJson(response.body(), Message.class);
+            msgController.setMessage(msg.message);
+            newTodo = null;
+        }
+
+        return newTodo;
     }
 }

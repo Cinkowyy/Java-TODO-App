@@ -102,12 +102,13 @@ public class MainController {
     void addTodoElement(LoginErrorMessage msgController, ArrayList<Todo> list, TodosController todosController) {
 
         if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
-            int id =  DataController.insertTodo(todoInput.getText());
             msgController.removeMessage();
-            Todo todo = new Todo(id, todoInput.getText(), false);
+            Todo todo = DataController.insertTodo(new Todo(0, todoInput.getText(), false), msgController, key);
             todoInput.setText("");
-            list.add(todo);
-            todosController.renderTasks(filter);
+            if(todo != null) {
+                list.add(todo);
+                todosController.renderTasks(filter);
+            }
         } else {
             msgController.setMessage("Empty field or too many characters(max 64)");
         }
