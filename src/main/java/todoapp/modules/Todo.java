@@ -20,7 +20,7 @@ public class Todo {
         this.status = taskStatus;
     }
 
-    public HBox renderTask() {
+    public HBox renderTask(DataController dataController) {
 
         int todoId = this.id;
 
@@ -52,7 +52,7 @@ public class Todo {
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             textStrikethrough(newValue, contentText);
             changeStatus(newValue);
-            DataController.updateStatus(todoId, newValue);
+            dataController.updateStatus(todoId, newValue);
         });
 
         contentContainer.getChildren().add(contentText);

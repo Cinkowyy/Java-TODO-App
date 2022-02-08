@@ -1,6 +1,7 @@
 package todoapp.controllers;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import todoapp.modules.AuthKey;
 import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Message;
@@ -11,12 +12,20 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 
-public abstract class DataController {
+public class DataController {
 
     static Gson gson = new Gson();
+    public final LoginErrorMessage errorMessageField;
+    private final AuthKey authorizationKey;
 
-    public static void updateStatus(int todoId, boolean newStatus) {
+    public DataController(AuthKey key, LoginErrorMessage message) {
+        this.authorizationKey = key;
+        this.errorMessageField = message;
+    }
+
+    public void updateStatus(int todoId, boolean newStatus) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/update"))
                 .header("Content-Type", "application/json")
@@ -33,19 +42,19 @@ public abstract class DataController {
         }
     }
 
-    public static void deleteTodo(int todoId) {
+    public void deleteTodo(int todoId) {
         System.out.println("Deleted todo id: "+ todoId);
     }
 
-    public static Todo insertTodo(Todo newTodo, LoginErrorMessage msgController, AuthKey key) {
+    public Todo insertTodo(Todo newTodo) {
 
         String jsonTodo = gson.toJson(newTodo);
-        System.out.println(key.getKey());
+        System.out.println(authorizationKey.getKey());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/add"))
                 .header("Content-Type", "application/json")
-                .header("Authorization", key.getKey())
+                .header("Authorization", authorizationKey.getKey())
                 .method("POST", HttpRequest.BodyPublishers.ofString(jsonTodo))
                 .build();
         HttpResponse<String> response = null;
@@ -60,10 +69,39 @@ public abstract class DataController {
             System.out.println("Added new todo");
         } else {
             Message msg = gson.fromJson(response.body(), Message.class);
-            msgController.setMessage(msg.message);
+            errorMessageField.setMessage(msg.message);
             newTodo = null;
         }
 
         return newTodo;
+    }
+
+    public ArrayList<Todo> getTodos() {
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/todos"))
+                .header("Authorization", authorizationKey.getKey())
+                .method("POST", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = null;
+        ArrayList<Todo> todosList = new ArrayList<>();
+
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+            if(response.statusCode() == 200) {
+                todosList= gson.fromJson(response.body(), new TypeToken<ArrayList<Todo>>(){}.getType());
+                return  todosList;
+            } else {
+                Message errorMsg = gson.fromJson(response.body(), Message.class);
+                errorMessageField.setMessage(errorMsg.message);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return todosList;
     }
 }

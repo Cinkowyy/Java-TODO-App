@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
 import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Todo;
-import todoapp.modules.TodosGetter;
+
 import java.util.ArrayList;
 
 public class MainController {
@@ -44,7 +44,7 @@ public class MainController {
     private Text errorMessageField;
 
     public MainController(AuthKey authKey) {
-        this.key =authKey;
+        this.key = authKey;
         this.filter = "All";
         System.out.println("MainController started with key:");
         System.out.println(key.getKey());
@@ -54,18 +54,19 @@ public class MainController {
     void initialize() {
 
         LoginErrorMessage todosMessageController = new LoginErrorMessage(errorMessageField);
+        DataController dataController = new DataController(this.key, todosMessageController);
 
-        ArrayList<Todo> todosList = TodosGetter.getTodos(this.key, todosMessageController);
+        ArrayList<Todo> todosList = dataController.getTodos();
 
-        TodosController todosController = new TodosController(this.todosContainer, todosList);
+        TodosController todosController = new TodosController(this.todosContainer, todosList, dataController);
 
         todoInput.setOnKeyPressed(keyEvent -> {
            if(keyEvent.getCode() == KeyCode.ENTER)
-               addTodoElement(todosMessageController,todosList, todosController);
+               addTodoElement(dataController, todosList, todosController);
         });
 
         newTodoIcon.setOnMouseClicked(mouseEvent -> {
-            addTodoElement(todosMessageController,todosList,todosController);
+            addTodoElement(dataController, todosList,todosController);
         });
 
         allFilter.setOnMouseClicked(mouseEvent -> {
@@ -99,18 +100,18 @@ public class MainController {
         completedFilter.getStyleClass().remove("active");
     }
 
-    void addTodoElement(LoginErrorMessage msgController, ArrayList<Todo> list, TodosController todosController) {
+    void addTodoElement(DataController dataController, ArrayList<Todo> list, TodosController todosController) {
 
         if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
-            msgController.removeMessage();
-            Todo todo = DataController.insertTodo(new Todo(0, todoInput.getText(), false), msgController, key);
+            dataController.errorMessageField.removeMessage();
+            Todo todo = dataController.insertTodo(new Todo(0, todoInput.getText(), false));
             todoInput.setText("");
             if(todo != null) {
                 list.add(todo);
                 todosController.renderTasks(filter);
             }
         } else {
-            msgController.setMessage("Empty field or too many characters(max 64)");
+            dataController.errorMessageField.setMessage("Empty field or too many characters(max 64)");
         }
 
     }

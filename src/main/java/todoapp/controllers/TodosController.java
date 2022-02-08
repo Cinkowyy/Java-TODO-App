@@ -3,18 +3,18 @@ package todoapp.controllers;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import todoapp.modules.Todo;
-
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class TodosController {
 
     VBox todosContainer;
     ArrayList<Todo> todosList;
+    DataController dataController;
 
-    public TodosController(VBox container, ArrayList<Todo> list) {
+    public TodosController(VBox container, ArrayList<Todo> list, DataController controller) {
         this.todosContainer = container;
         this.todosList = list;
+        this.dataController = controller;
     }
 
     public void renderTasks(String filter) {
@@ -41,7 +41,7 @@ public class TodosController {
 
     public HBox addListener(Todo todo, String filter) {
 
-        HBox todoElement = todo.renderTask();
+        HBox todoElement = todo.renderTask(dataController);
         todoElement.lookup(".cross-icon").setOnMouseClicked(MouseEvent -> {
             todosList.remove(todo);
             renderTasks(filter);
