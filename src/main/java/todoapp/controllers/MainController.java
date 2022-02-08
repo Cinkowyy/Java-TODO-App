@@ -20,6 +20,9 @@ public class MainController {
     private TextField todoInput;
 
     @FXML
+    private Text newTodoIcon;
+
+    @FXML
     private VBox todosContainer;
 
     @FXML
@@ -59,6 +62,10 @@ public class MainController {
         todoInput.setOnKeyPressed(keyEvent -> {
            if(keyEvent.getCode() == KeyCode.ENTER)
                addTodoElement(todosMessageController,todosList, todosController);
+        });
+
+        newTodoIcon.setOnMouseClicked(mouseEvent -> {
+            addTodoElement(todosMessageController,todosList,todosController);
         });
 
         allFilter.setOnMouseClicked(mouseEvent -> {
