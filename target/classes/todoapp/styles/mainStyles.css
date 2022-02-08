@@ -28,7 +28,8 @@
 }
 
 .plus-icon:hover {
-    cursor:hand;
+    -fx-cursor:hand;
+    -fx-fill: linear-gradient(to bottom right,#57ddff, #c058f3);
 }
 
 .content-container {
