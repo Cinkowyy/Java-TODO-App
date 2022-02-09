@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import todoapp.controllers.ErrorMessageController;
 import todoapp.controllers.MainController;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public abstract class UserAuthentication {
 
     public static AuthKey authKey;
 
-    public static boolean authenticate(String login, String password, LoginErrorMessage errorMessageController) {
+    public static boolean authenticate(String login, String password, ErrorMessageController errorMessageController) {
 
         UserData data = new UserData(login, password);
 

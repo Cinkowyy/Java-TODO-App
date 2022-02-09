@@ -1,12 +1,12 @@
-package todoapp.modules;
+package todoapp.controllers;
 
 import javafx.scene.text.Text;
 
-public class LoginErrorMessage {
+public class ErrorMessageController {
 
     Text errorTextField;
 
-    public LoginErrorMessage(Text field) {
+    public ErrorMessageController(Text field) {
         this.errorTextField =  field;
     }
 

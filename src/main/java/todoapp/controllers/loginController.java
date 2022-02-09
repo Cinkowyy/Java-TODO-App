@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.UserAuthentication;
 import java.io.IOException;
 
@@ -30,7 +29,7 @@ public class LoginController {
     @FXML
     void initialize() {
 
-        LoginErrorMessage loginMessageController = new LoginErrorMessage(errorMessage);
+        ErrorMessageController loginMessageController = new ErrorMessageController(errorMessage);
         loginButton.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

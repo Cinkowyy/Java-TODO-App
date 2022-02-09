@@ -6,7 +6,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
-import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Todo;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class MainController {
     @FXML
     void initialize() {
 
-        LoginErrorMessage todosMessageController = new LoginErrorMessage(errorMessageField);
+        ErrorMessageController todosMessageController = new ErrorMessageController(errorMessageField);
         DataController dataController = new DataController(this.key, todosMessageController);
 
         ArrayList<Todo> todosList = dataController.getTodos();

@@ -3,7 +3,6 @@ package todoapp.controllers;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import todoapp.modules.AuthKey;
-import todoapp.modules.LoginErrorMessage;
 import todoapp.modules.Message;
 import todoapp.modules.Todo;
 
@@ -17,10 +16,10 @@ import java.util.ArrayList;
 public class DataController {
 
     static Gson gson = new Gson();
-    public final LoginErrorMessage errorMessageField;
+    public final ErrorMessageController errorMessageField;
     private final AuthKey authorizationKey;
 
-    public DataController(AuthKey key, LoginErrorMessage message) {
+    public DataController(AuthKey key, ErrorMessageController message) {
         this.authorizationKey = key;
         this.errorMessageField = message;
     }
