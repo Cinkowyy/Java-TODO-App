@@ -140,7 +140,7 @@
 }
 
 .filter-item:hover,
-.outside-element:hover {
+.outside-element.clickable:hover {
     -fx-fill: #484B6A;
     -fx-cursor: hand;
 }

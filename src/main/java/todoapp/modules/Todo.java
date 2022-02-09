@@ -50,9 +50,10 @@ public class Todo {
 
         //change status event
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-            textStrikethrough(newValue, contentText);
-            changeStatus(newValue);
-            dataController.updateStatus(todoId, newValue);
+            if(dataController.updateStatus(todoId, newValue)) {
+                textStrikethrough(newValue, contentText);
+                changeStatus(newValue);
+            }
         });
 
         contentContainer.getChildren().add(contentText);

@@ -24,21 +24,33 @@ public class DataController {
         this.errorMessageField = message;
     }
 
-    public void updateStatus(int todoId, boolean newStatus) {
+    public boolean updateStatus(int todoId, boolean newStatus) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/update"))
                 .header("Content-Type", "application/json")
+                .header("Authorization", authorizationKey.getKey())
                 .method("POST", HttpRequest.BodyPublishers.ofString("{\n\t\"id\":" + todoId +",\n\t\"status\": "+ newStatus+"\n}"))
                 .build();
         HttpResponse<String> response = null;
+        boolean resStatus = false;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             Message resMessage = gson.fromJson(response.body(), Message.class);
-            System.out.println(resMessage.message);
+
+            if(response.statusCode() == 200) {
+                errorMessageField.removeMessage();
+                resStatus = true;
+                System.out.println(resMessage.message);
+            } else {
+                errorMessageField.setMessage(resMessage.message);
+            }
 
         } catch (IOException | InterruptedException e) {
+            errorMessageField.setMessage("Server connection error");
             e.printStackTrace();
         }
+
+        return resStatus;
     }
 
     public void deleteTodo(int todoId) {
@@ -57,19 +69,21 @@ public class DataController {
                 .method("POST", HttpRequest.BodyPublishers.ofString(jsonTodo))
                 .build();
         HttpResponse<String> response = null;
+        newTodo = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        if( response != null && response.statusCode() == 200) {
-            newTodo = gson.fromJson(response.body(), Todo.class);
-            System.out.println("Added new todo");
-        } else {
-            Message msg = gson.fromJson(response.body(), Message.class);
-            errorMessageField.setMessage(msg.message);
-            newTodo = null;
+            if(response.statusCode() == 200) {
+                newTodo = gson.fromJson(response.body(), Todo.class);
+                System.out.println("Added new todo");
+            } else {
+                Message msg = gson.fromJson(response.body(), Message.class);
+                errorMessageField.setMessage(msg.message);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            errorMessageField.setMessage("Server connection error");
+            e.printStackTrace();
         }
 
         return newTodo;
@@ -98,6 +112,7 @@ public class DataController {
             }
 
         } catch (IOException | InterruptedException e) {
+            errorMessageField.setMessage("Server connection error");
             e.printStackTrace();
         }
 

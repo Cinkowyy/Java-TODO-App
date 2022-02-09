@@ -82,7 +82,11 @@
                   <Pane layoutX="2.0" layoutY="306.0" styleClass="bottom-bar">
                      <children>
                         <Text fx:id="numberOfItems" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="5 items left" />
-                        <Text fx:id="clearOption" layoutX="292.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="outside-element" text="Clear completed" />
+                        <Text fx:id="clearOption" layoutX="292.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clear completed">
+                           <styleClass>
+                              <String fx:value="outside-element" />
+                              <String fx:value="clickable" />
+                           </styleClass></Text>
                         <Text fx:id="allFilter" layoutX="133.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All">
                            <styleClass>
                               <String fx:value="filter-item" />
