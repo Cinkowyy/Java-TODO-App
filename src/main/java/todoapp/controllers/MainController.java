@@ -57,7 +57,8 @@ public class MainController {
 
         ArrayList<Todo> todosList = dataController.getTodos();
 
-        TodosController todosController = new TodosController(this.todosContainer, todosList, dataController);
+
+        TodosController todosController = new TodosController(this.todosContainer, todosList, dataController, numberOfItems);
 
         todoInput.setOnKeyPressed(keyEvent -> {
            if(keyEvent.getCode() == KeyCode.ENTER)
@@ -105,6 +106,7 @@ public class MainController {
             dataController.errorMessageField.removeMessage();
             Todo todo = dataController.insertTodo(new Todo(0, todoInput.getText(), false));
             todoInput.setText("");
+            numberOfItems.requestFocus();
             if(todo != null) {
                 list.add(todo);
                 todosController.renderTasks(filter);
@@ -113,6 +115,17 @@ public class MainController {
             dataController.errorMessageField.setMessage("Empty field or too many characters(max 64)");
         }
 
+    }
+
+    static int getNumberOfUncompleted(ArrayList<Todo> list) {
+        int uncompletedElements = 0;
+
+        for (Todo el : list) {
+            if(!el.status)
+                uncompletedElements += 1;
+        }
+
+        return uncompletedElements;
     }
 
 }

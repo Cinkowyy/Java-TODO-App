@@ -20,7 +20,7 @@ public class Todo {
         this.status = taskStatus;
     }
 
-    public HBox renderTask(DataController dataController) {
+    public HBox renderTask(DataController dataController, Text numberOfItems) {
 
         int todoId = this.id;
 
@@ -53,6 +53,13 @@ public class Todo {
             if(dataController.updateStatus(todoId, newValue)) {
                 textStrikethrough(newValue, contentText);
                 changeStatus(newValue);
+                int number = Integer.parseInt(numberOfItems.getText().split(" ")[0]);
+                if(newValue)
+                    number-=1;
+                else
+                    number+=1;
+
+                numberOfItems.setText(number +" items left");
             }
         });
 
