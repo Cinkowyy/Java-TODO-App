@@ -53,14 +53,38 @@ public class DataController {
         return resStatus;
     }
 
-    public void deleteTodo(int todoId) {
-        System.out.println("Deleted todo id: "+ todoId);
+    public boolean deleteTodo(int todoId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/delete"))
+                .header("Content-Type", "application/json")
+                .header("Authorization", authorizationKey.getKey())
+                .method("POST", HttpRequest.BodyPublishers.ofString("{\n\t\"id\":" +todoId+"}"))
+                .build();
+        HttpResponse<String> response = null;
+        boolean resStatus = false;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            Message resMessage = gson.fromJson(response.body(), Message.class);
+
+            if(response.statusCode() == 200) {
+                errorMessageField.removeMessage();
+                resStatus = true;
+                System.out.println(resMessage.message);
+            } else {
+                errorMessageField.setMessage(resMessage.message);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            errorMessageField.setMessage("Server connection error");
+            e.printStackTrace();
+        }
+
+        return resStatus;
     }
 
     public Todo insertTodo(Todo newTodo) {
 
         String jsonTodo = gson.toJson(newTodo);
-        System.out.println(authorizationKey.getKey());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/add"))

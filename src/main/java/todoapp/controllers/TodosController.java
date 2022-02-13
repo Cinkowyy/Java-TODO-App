@@ -43,8 +43,12 @@ public class TodosController {
 
         HBox todoElement = todo.renderTask(dataController);
         todoElement.lookup(".cross-icon").setOnMouseClicked(MouseEvent -> {
-            todosList.remove(todo);
-            renderTasks(filter);
+
+            if(dataController.deleteTodo(todo.id)) {
+                todosList.remove(todo);
+                renderTasks(filter);
+            }
+
         });
 
         return  todoElement;
