@@ -53,6 +53,33 @@ public class DataController {
         return resStatus;
     }
 
+    public boolean clearTodos() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/clear"))
+                .header("Authorization", authorizationKey.getKey())
+                .method("POST", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = null;
+        boolean resStatus = false;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            Message resMessage = gson.fromJson(response.body(), Message.class);
+
+            if(response.statusCode() == 200) {
+                errorMessageField.removeMessage();
+                resStatus = true;
+                System.out.println(resMessage.message);
+            } else {
+                errorMessageField.setMessage(resMessage.message);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            errorMessageField.setMessage("Server connection error");
+            e.printStackTrace();
+        }
+        return resStatus;
+    }
+
     public boolean deleteTodo(int todoId) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/delete"))

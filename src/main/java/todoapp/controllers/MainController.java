@@ -8,6 +8,7 @@ import javafx.scene.text.Text;
 import todoapp.modules.AuthKey;
 import todoapp.modules.Todo;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class MainController {
@@ -59,6 +60,13 @@ public class MainController {
 
 
         TodosController todosController = new TodosController(this.todosContainer, todosList, dataController, numberOfItems);
+
+        clearOption.setOnMouseClicked(mouseEvent -> {
+            if(dataController.clearTodos()) {
+                todosList.removeIf(el -> el.status);
+                todosController.renderTasks(filter);
+            }
+        });
 
         todoInput.setOnKeyPressed(keyEvent -> {
            if(keyEvent.getCode() == KeyCode.ENTER)
