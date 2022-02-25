@@ -24,6 +24,12 @@ public class DataController {
         this.errorMessageField = message;
     }
 
+    /***
+     * This method is responsible for changing the status in the database. Function sends a request to the server
+     * @param todoId this is ID of todo
+     * @param newStatus this is bool new todo status
+     * @return true if successful updated or false if error
+     */
     public boolean updateStatus(int todoId, boolean newStatus) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/update"))
@@ -53,6 +59,10 @@ public class DataController {
         return resStatus;
     }
 
+    /***
+     * This method is responsible for deleting all completed items in the database
+     * @return true if successful updated or false if error
+     */
     public boolean clearTodos() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/clear"))
@@ -80,6 +90,11 @@ public class DataController {
         return resStatus;
     }
 
+    /***
+     * This method is responsible for removing a single element with a given id
+     * @param todoId this is ID of todo
+     * @return true if successful updated or false if error
+     */
     public boolean deleteTodo(int todoId) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/delete"))
@@ -109,6 +124,11 @@ public class DataController {
         return resStatus;
     }
 
+    /***
+     * This method is responsible for adding a new element to the database
+     * @param newTodo Todo object to insert
+     * @return Todo object if successful insert or null if error
+     */
     public Todo insertTodo(Todo newTodo) {
 
         String jsonTodo = gson.toJson(newTodo);
@@ -140,6 +160,10 @@ public class DataController {
         return newTodo;
     }
 
+    /***
+     * This method is responsible for retrieving the elements of a given user from the database
+     * @return ArrayList of Todos if successful or empty ArrayList if error
+     */
     public ArrayList<Todo> getTodos() {
 
         HttpRequest request = HttpRequest.newBuilder()

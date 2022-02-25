@@ -20,6 +20,10 @@ public class TodosController {
         this.numberOfItems = numberText;
     }
 
+    /***
+     * This method is renders todo items on the UI
+     * @param filter string indicating the status of the item to be displayed
+     */
     public void renderTasks(String filter) {
 
         todosContainer.getChildren().clear();
@@ -43,6 +47,12 @@ public class TodosController {
         }
     }
 
+    /***
+     * This method adds mouse click listener on X icon to delete task
+     * @param todo todo element to render
+     * @param filter string indicating the status of the item to be displayed
+     * @return UI element representing single todo
+     */
     public HBox addListener(Todo todo, String filter) {
 
         HBox todoElement = todo.renderTask(dataController, numberOfItems);

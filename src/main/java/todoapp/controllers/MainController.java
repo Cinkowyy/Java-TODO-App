@@ -102,12 +102,21 @@ public class MainController {
 
     }
 
+    /***
+     * This method is clearing active class on all elements
+     */
     void clearActiveClass() {
         allFilter.getStyleClass().remove("active");
         activeFilter.getStyleClass().remove("active");
         completedFilter.getStyleClass().remove("active");
     }
 
+    /***
+     * This method is adding new todo element to UI
+     * @param dataController controller that will be used for error handling
+     * @param list ArrayList of Todo elements
+     * @param todosController controller that will be used to render todos in UI
+     */
     void addTodoElement(DataController dataController, ArrayList<Todo> list, TodosController todosController) {
 
         if(todoInput.getText().length()>0 && todoInput.getText().length()<64) {
@@ -125,6 +134,11 @@ public class MainController {
 
     }
 
+    /***
+     * This method is counting uncompleted todos
+     * @param list ArrayList of Todos to check
+     * @return number of uncompleted todos
+     */
     static int getNumberOfUncompleted(ArrayList<Todo> list) {
         int uncompletedElements = 0;
 

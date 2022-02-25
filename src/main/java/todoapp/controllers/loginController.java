@@ -44,6 +44,10 @@ public class LoginController {
 
     }
 
+    /***
+     * This method performs initial data validation and is responsible for logging
+     * @param loginMessageController controller that will be used for error handling
+     */
     public void login(ErrorMessageController loginMessageController) {
         if (loginInput.getText().length() == 0 || passwordInput.getText().length() == 0) {
             loginMessageController.setMessage("Fields cannot be empty");

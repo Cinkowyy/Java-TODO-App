@@ -67,7 +67,7 @@
       <recent name="todoapp" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AppTests">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="todoapp.Main" />
       <module name="TODO-App" />

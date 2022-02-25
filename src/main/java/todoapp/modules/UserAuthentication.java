@@ -19,6 +19,13 @@ public abstract class UserAuthentication {
 
     public static AuthKey authKey;
 
+    /***
+     * This method is authenticating user
+     * @param login user login
+     * @param password user password
+     * @param errorMessageController controller that will be used for error handling
+     * @return true if successful or false if error
+     */
     public static boolean authenticate(String login, String password, ErrorMessageController errorMessageController) {
 
         UserData data = new UserData(login, password);
@@ -53,6 +60,12 @@ public abstract class UserAuthentication {
     }
 
 
+    /***
+     * This method is loading a main view scene
+     * @param AppStage App Window to display new scene
+     * @param url url of FXML file with main app view
+     * @throws IOException if an error occurred
+     */
     @FXML
     public static void loadMainView(Stage AppStage, URL url) throws IOException {
         FXMLLoader loader = new FXMLLoader();
