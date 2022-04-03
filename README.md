@@ -5,7 +5,7 @@
 ## General Information
 The application has a simple user login. Their tasks are stored in the database. Tasks can be deleted and their status changed. The application also has an option to filter the displayed tasks. 
 
-Tasks in the database are managed by a server written in Node.js. 
+Tasks in the database are managed by a server written in Node.js.    
 Link to the server repository: https://github.com/Cinkowyy/java-todo-server
 
 The interface was built in JavaFX Scene Builder.
@@ -21,15 +21,12 @@ Link: https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW
 
 ## Screenshots
 
-<img src="screenshots\login_view.png" style="zoom: 67%;" />
-*Login view*
-
-
-
-<img src="screenshots\login_view_interactions.png" style="zoom: 67%;" />
-*Interactions in login view*
-
-
-
-<img src="screenshots\todos_view.png" style="zoom: 67%;" />
-*Todos list view*
+<img src="screenshots\login_view.png" style="zoom: 67%;"/>*Login view*
+<br />
+<br />
+<br />
+<img src="screenshots\login_view_interactions.png" style="zoom: 67%;" />*Interactions in login view*
+<br />
+<br />
+<br />
+<img src="screenshots\todos_view.png" style="zoom: 67%;" />*Todos list view*
